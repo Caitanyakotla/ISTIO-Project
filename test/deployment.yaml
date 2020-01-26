@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trivago    
+  labels:
+    app: trivago
+    service: trivago
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: trivago
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: siteinfo-trivago
+  labels:
+    account: trivago
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trivago-v1
+  labels:
+    app: trivago
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trivago
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: trivago
+        version: v1
+    spec:
+      serviceAccountName: siteinfo-trivago
+      containers:
+      - name: trivago
+        image: java-webserver:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port:  8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port:  8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trivago-v2
+  labels:
+    app: trivago
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trivago
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: trivago
+        version: v2
+    spec:
+      serviceAccountName: siteinfo-trivago
+      containers:
+      - name: trivago
+        image: go-webserver:v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port:  8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port:  8080

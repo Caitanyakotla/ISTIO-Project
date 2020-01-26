@@ -1,0 +1,58 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: trivago-gateway    # we can call it with any name.
+spec:
+  selector:
+    istio: ingressgateway  # use Istio default gateway Implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"   # Domain name of the external website
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: trivago
+spec:
+  hosts:    # Which incoming host are we applying the proxy rules to???
+  - "*"     # Copy the value in the gateway hosts
+  gateways:
+  - trivago-gateway      
+  http:
+  - match:
+    - uri:  # IF 
+        prefix: /
+    route:
+    - destination:
+        host: trivago
+        subset: v1
+      weight: 30
+    - destination:
+        host: trivago       # The target DNS name
+        subset: v2         # the name defined in the destination rule
+      weight: 70
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule    # Defining which pods should be part of each subset
+metadata:
+  name: trivago
+spec:
+  host: trivago           # Service
+  subsets:
+  - name: v1
+    labels:               # SELECTOR.
+      version: v1    # find pods with label "v1"
+  - name: v2
+    labels:
+      version: v2
+
+    \\  TrafficPolicy:
+    \\     outlierDectection: # Circuit Breakers Hava to be Switched ON
+    \\        consecutiveErrors: 
+    \\        interval: 
+    \\        baseEjectionTime: 
+    \\        maxEjectionPercent:
