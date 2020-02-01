@@ -27,14 +27,14 @@ step 4:
 delete testsetup by following commands
 kubectl delete -f gateway.yaml
 kubectl delete -f deployment.yaml
-istioctl manifest generate --set profile=demo | kubectl delete -f -
+istioctl manifest generate --set profile=demo
 
-		Dynamic service discovery
-		Load balancing(some % based on on application)
-		TLS termination
-		HTTP/2 and gRPC proxies
-		Circuit breakers
-		Health checks(Liveness probe/ReadinessProbe)
-		Staged rollouts with %-based traffic split()
-		Fault injection
-		Rich metrics(Jaeger/Kiali)
+		//Dynamic service discovery
+		//Load balancing(some % based on on application)
+		//TLS termination
+		//HTTP/2 and gRPC proxies
+		//Circuit breakers
+		//Health checks(Liveness probe/ReadinessProbe)
+		//Staged rollouts with %-based traffic split()
+		//Fault injection
+		//Rich metrics(Jaeger) Kiali by using this tool we can control the network.
