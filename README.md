@@ -1,11 +1,8 @@
 # ISTIO-Project
 ISTIO, Two Applications, GO AND jAVA APPLICATIONS. Splitted the n/w using service mesh.
 
-
-Please submit your results via the link provided in the email from your recruiter. There you can upload your files in a zip archive. 
-
 You will find two binaries, one Go based application, one Java-based application. Both are providing an HTTP service with the same endpoints: 
-Route 	Description 
+Description 
 / 	A static site. Should not appear in the final setup as it is but redirect to /hotels. 
 /hotels 	JSON object containing hotel search results 
 /health 	Exposes the health status of the application 
