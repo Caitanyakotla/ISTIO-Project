@@ -9,7 +9,6 @@ Description
 /ready 	Readiness probe 
 /metrics 	Exposes metrics of the application 
   	 
-Your Task  
 My task is to provide a load balancer setup like the following: 
   
  
