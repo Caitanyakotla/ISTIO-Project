@@ -1,5 +1,11 @@
-# ISTIO-Project
-ISTIO, Two Applications, GO AND jAVA APPLICATIONS. Splitted the n/w using  Istio service mesh.
+# ISTIO-Project: ISTIO, Two Applications, GO AND jAVA APPLICATIONS. Splitted the n/w using  Istio service mesh.
+Istio - An independent open source service mesh that facilitates the fundamentals needed to work successfully on a Microservice Architecture.
+
+# Securing authentication
+# Encrypting the communication among different microservices.
+# Securing authorization factors.
+  So it turns out to be very useful to develop application level security.
+# We built Docker image, deployed it using Kubernetes, and queried our appllication. 
 
 You will find two binaries, one Go based application, one Java-based application. Both are providing an HTTP service with the same endpoints: 
 Description 
@@ -17,3 +23,4 @@ Additional information:
 •	The applications were built using Go 1.12 (provided as Linux binary) and Java 11 
 •	Both applications are binding to all interfaces on port 8080 
  
+Cloud: Google Cloud Platform(GKE)
